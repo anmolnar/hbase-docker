@@ -1,0 +1,3 @@
+hbase/
+.env
+.DS_Store

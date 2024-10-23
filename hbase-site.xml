@@ -1,0 +1,64 @@
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+  <property>
+     <name>hbase.zookeeper.quorum</name>
+     <value>hbase-docker</value>
+  </property>
+  <property>
+     <name>hbase.zookeeper.property.dataDir</name>
+     <value>/data-store/zk</value>
+  </property>
+  <property>
+    <name>hbase.rootdir</name>
+    <value>file:///data-store/hbase</value>
+  </property>
+
+  <property>
+    <name>hbase.master.info.bindAddress</name>
+    <value>hbase-docker</value>
+  </property>
+
+  <property>
+    <name>hbase.regionserver.info.bindAddress</name>
+    <value>hbase-docker</value>
+  </property>
+  <property>
+    <name>hbase.unsafe.stream.capability.enforce</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.rest.port</name>
+    <value>8000</value>
+  </property>
+
+
+  <property>
+    <name>hbase.backup.enable</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.master.logcleaner.plugins</name>
+    <value>org.apache.hadoop.hbase.backup.master.BackupLogCleaner</value>
+  </property>
+  <property>
+    <name>hbase.procedure.master.classes</name>
+    <value>org.apache.hadoop.hbase.backup.master.LogRollMasterProcedureManager</value>
+  </property>
+  <property>
+    <name>hbase.procedure.regionserver.classes</name>
+    <value>org.apache.hadoop.hbase.backup.regionserver.LogRollRegionServerProcedureManager</value>
+  </property>
+  <property>
+    <name>hbase.coprocessor.region.classes</name>
+    <value>org.apache.hadoop.hbase.backup.BackupObserver</value>
+  </property>
+  <property>
+    <name>hbase.master.hfilecleaner.plugins</name>
+    <value>org.apache.hadoop.hbase.backup.BackupHFileCleaner</value>
+  </property>
+</configuration>
