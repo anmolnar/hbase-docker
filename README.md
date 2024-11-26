@@ -18,7 +18,7 @@
    ```
 3. Make the build script executable:
    ```bash
-   chmod +x build_images.sh
+   chmod +x build-images.sh
    ```
 4. Build the images:
    ```bash
