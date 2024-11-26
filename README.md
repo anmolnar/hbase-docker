@@ -3,6 +3,9 @@
 ### Build Docker Images
 
 1. Create `.env` with the correct details.
+   ```bash
+   HBASE_IMAGE=vhegde/hbase-docker
+   ```
 2. Make the build script executable:
    ```bash
    chmod +x build_images.sh
@@ -12,9 +15,9 @@
    ./build_images.sh
    ```
 
-### Run Containers
+### Run Container
 
-Start HBase and GeoServer:
+Start HBase:
 ```bash
 docker-compose up -d
 ```

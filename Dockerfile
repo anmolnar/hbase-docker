@@ -49,7 +49,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk \
     DATA_DIR=/data-store
 
 # Install necessary runtime packages
-RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients
+RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients python3
 
 # Copy the built HBase binaries from the build-stage
 COPY --from=build-stage /opt/hbase-src/hbase-assembly/target/hbase-4.0.0-alpha-1-SNAPSHOT-bin.tar.gz /opt/
@@ -80,6 +80,9 @@ COPY zoo.cfg ${HBASE_CONF_DIR}/zoo.cfg
 
 # Expose required ports for HBase and related services
 EXPOSE 8000 8080 8085 9090 9095 2181 16000 16010 16020 16030
+
+# Set up the utils directory as a volume
+VOLUME ["/opt/utils"]
 
 # Switch to the HBase user
 USER ${HBASE_USER}
