@@ -22,7 +22,7 @@
    ```
 4. Build the images:
    ```bash
-   ./build_images.sh
+   ./build-images.sh
    ```
 
 ### Run Container
