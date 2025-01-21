@@ -1,3 +1,13 @@
+# Check if the correct number of arguments are provided
+if [ "$#" -ne 2 ]; then
+  echo "Usage: $0 <table_name> <column_family>"
+  exit 1
+fi
+
+
+TABLE_NAME=$1
+COLUMN_FAMILY=$2
+
 # Clean up any existing bulkload directories
 rm -rf /tmp/bulkload
 
@@ -9,9 +19,9 @@ python3 tsv_generator.py /tmp/bulkload/tsvdata
 
 # Import TSV data to create HFiles for bulk loading
 hbase org.apache.hadoop.hbase.mapreduce.ImportTsv \
-  -Dimporttsv.columns=HBASE_ROW_KEY,cf:col0,cf:col1,cf:col2,cf:col3,cf:col4,cf:col5,cf:col6,cf:col7,cf:col8,cf:col9 \
+  -Dimporttsv.columns=HBASE_ROW_KEY,$COLUMN_FAMILY:col0,$COLUMN_FAMILY:col1,$COLUMN_FAMILY:col2,$COLUMN_FAMILY:col3,$COLUMN_FAMILY:col4,$COLUMN_FAMILY:col5,$COLUMN_FAMILY:col6,$COLUMN_FAMILY:col7,$COLUMN_FAMILY:col8,$COLUMN_FAMILY:col9 \
   -Dimporttsv.bulk.output=/tmp/bulkload/HFiles \
-  usertable /tmp/bulkload/tsvdata/output.tsv
+  $TABLE_NAME /tmp/bulkload/tsvdata/output.tsv
 
 # Bulk load the generated HFiles into the HBase table
-hbase completebulkload /tmp/bulkload/HFiles usertable
+hbase completebulkload /tmp/bulkload/HFiles $TABLE_NAME
