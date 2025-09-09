@@ -1,6 +1,6 @@
 ## HBase Docker Setup
 
-Based on @vinayakphegde 's original Docker images for HBase and extended to run two clusters side-by-side mainly for HBase Read Replica Cluster feature testing.
+Based on **@vinayakphegde** 's original Docker images for HBase and extended to run two clusters side-by-side mainly for **HBase Read Replica Cluster** feature testing.
 There are two "conf" folders for the individual cluster with common root directories (/data-store/hbase is mounted from local filesystem), but separated WAL 
 directories and separate ZooKeeper databases. The "hbase" cluster is the Active Cluster while the "hbase2" is the Read Replica Cluster which is set up with 
 global read-only mode enabled. 
@@ -57,4 +57,3 @@ Shutdown containers:
 ```bash
 docker-compose down
 ```
-

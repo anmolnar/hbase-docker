@@ -1,3 +1,4 @@
 hbase/
 .env
 .DS_Store
+.idea/
