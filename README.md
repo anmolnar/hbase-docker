@@ -52,3 +52,9 @@ Exec shell inside container:
 docker exec -it <container_id> /bin/bash
 ```
 
+Shutdown containers:
+
+```bash
+docker-compose down
+```
+
