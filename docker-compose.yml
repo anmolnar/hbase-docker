@@ -5,17 +5,19 @@ services:
     image: "${HBASE_IMAGE}"
     container_name: hbase-docker
     hostname: hbase-docker
-    ports:
-      - "8000:8000"
-      - "8765:8765"
-      - "8080:8080"
-      - "8085:8085"
-      - "9090:9090"
-      - "9095:9095"
-      - "2181:2181"
-      - "16000:16000"
-      - "16010:16010"
-      - "16020:16020"
-      - "16030:16030"
     volumes:
       - ./utils:/opt/utils
+      - /Users/andor/tmp/data-store/hbase:/data-store/hbase
+      - ./conf1/hbase-site.xml:${HBASE_CONF_DIR}/hbase-site.xml
+      - ./conf1/zoo.cfg:${HBASE_CONF_DIR}/zoo.cfg
+
+  hbase2:
+    image: "${HBASE_IMAGE}"
+    container_name: hbase-docker-2
+    hostname: hbase-docker-2
+    volumes:
+      - ./utils:/opt/utils
+      - /Users/andor/tmp/data-store/hbase:/data-store/hbase
+      - ./conf2/hbase-site.xml:${HBASE_CONF_DIR}/hbase-site.xml
+      - ./conf2/zoo.cfg:${HBASE_CONF_DIR}/zoo.cfg
+

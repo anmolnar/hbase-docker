@@ -74,9 +74,7 @@ RUN useradd -u 1000 -m ${HBASE_USER} \
 # Set permissions for jboss home directory
 RUN chown -R ${HBASE_USER}:${HBASE_USER} /home/jboss
 
-# Copy configuration files
-COPY hbase-site.xml ${HBASE_CONF_DIR}/hbase-site.xml
-COPY zoo.cfg ${HBASE_CONF_DIR}/zoo.cfg
+# Copy configuration files - Removed in order to mount config files individually #
 
 # Expose required ports for HBase and related services
 EXPOSE 8000 8080 8085 9090 9095 2181 16000 16010 16020 16030

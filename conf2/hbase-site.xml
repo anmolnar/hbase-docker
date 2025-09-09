@@ -3,7 +3,7 @@
 
   <property>
      <name>hbase.zookeeper.quorum</name>
-     <value>hbase-docker</value>
+     <value>hbase-docker-2</value>
   </property>
   <property>
      <name>hbase.zookeeper.property.dataDir</name>
@@ -13,15 +13,26 @@
     <name>hbase.rootdir</name>
     <value>file:///data-store/hbase</value>
   </property>
-
   <property>
-    <name>hbase.master.info.bindAddress</name>
-    <value>hbase-docker</value>
+    <name>hbase.wal.dir</name>
+    <value>file:///data-store/wal</value>
+  </property>
+  <property>
+    <name>hbase.master.store.dir</name>
+    <value>MasterData2</value>
+  </property>
+  <property>
+    <name>hbase.store.file-tracker.impl</name>
+    <value>FILE</value>
   </property>
 
   <property>
+    <name>hbase.master.info.bindAddress</name>
+    <value>hbase-docker-2</value>
+  </property>
+  <property>
     <name>hbase.regionserver.info.bindAddress</name>
-    <value>hbase-docker</value>
+    <value>hbase-docker-2</value>
   </property>
   <property>
     <name>hbase.unsafe.stream.capability.enforce</name>
@@ -36,38 +47,30 @@
     <value>8000</value>
   </property>
 
-
   <property>
-    <name>hbase.backup.enable</name>
+    <name>hbase.global.readonly.enabled</name>
     <value>true</value>
   </property>
   <property>
-    <name>hbase.master.logcleaner.plugins</name>
-    <value>org.apache.hadoop.hbase.backup.master.BackupLogCleaner</value>
+    <name>hbase.coprocessor.master.classes</name>
+    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
   </property>
   <property>
-    <name>hbase.procedure.master.classes</name>
-    <value>org.apache.hadoop.hbase.backup.master.LogRollMasterProcedureManager</value>
-  </property>
-  <property>
-    <name>hbase.procedure.regionserver.classes</name>
-    <value>org.apache.hadoop.hbase.backup.regionserver.LogRollRegionServerProcedureManager</value>
+    <name>hbase.coprocessor.regionserver.classes</name>
+    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
   </property>
   <property>
     <name>hbase.coprocessor.region.classes</name>
-    <value>org.apache.hadoop.hbase.backup.BackupObserver</value>
+    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
+  </property>
+
+  <property>
+    <name>hbase.meta.table.suffix</name>
+    <value>replica1</value>
   </property>
   <property>
-    <name>hbase.master.hfilecleaner.plugins</name>
-    <value>org.apache.hadoop.hbase.backup.BackupHFileCleaner</value>
+    <name>hbase.master.hbck.chore.interval</name>
+    <value>0</value>
   </property>
-  
-  <property>
-    <name>hbase.replication.bulkload.enabled</name>
-    <value>true</value>
-  </property>
-  <property>
-    <name>hbase.replication.cluster.id</name>
-    <value>clusterId1</value>
-  </property>
+
 </configuration>
