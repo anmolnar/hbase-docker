@@ -1,10 +1,17 @@
 ## HBase Docker Setup
 
+Based on @vinayakphegde 's original Docker images for HBase and extended to run two clusters side-by-side mainly for HBase Read Replica Cluster feature testing.
+There are two "conf" folders for the individual cluster with common root directories (/data-store/hbase is mounted from local filesystem), but separated WAL 
+directories and separate ZooKeeper databases. The "hbase" cluster is the Active Cluster while the "hbase2" is the Read Replica Cluster which is set up with 
+global read-only mode enabled. 
+
 ### Build Docker Images
 
 1. Ensure the HBase source code directory is located within the current directory (alongside the Dockerfile and other required files). The directory should contain the HBase source code needed to build the image. The structure should look like this:
    ```bash
    .
+   ├── conf1/
+   ├── conf2/
    ├── Dockerfile
    ├── docker-compose.yml
    ├── build-images.sh
@@ -25,9 +32,23 @@
    ./build-images.sh
    ```
 
-### Run Container
+### Run the containers
 
-Start HBase:
+Start "hbase" cluster:
+
 ```bash
-docker-compose up -d
+docker-compose up -d hbase
 ```
+
+Start "hbase2" cluster:
+
+```bash
+docker-compose up -d hbase2
+```
+
+Exec shell inside container:
+
+```bash
+docker exec -it <container_id> /bin/bash
+```
+
