@@ -22,12 +22,23 @@ global read-only mode enabled.
 2. Create `.env` with the correct details.
    ```bash
    HBASE_IMAGE=vhegde/hbase-docker
+   HBASE_CONF_DIR=/opt/hbase/conf
    ```
-3. Make the build script executable:
+3. Modify the paths in your `docker-compose.yml` file to be compatible with your filesystem. For example, change:
+   ```
+   volumes:
+     - /Users/andor/tmp/data-store/hbase:/data-store/hbase
+   ```
+   To:
+   ```
+   volumes:
+     - /Users/<YOUR-USERNAME>/tmp/data-store/hbase:/data-store/hbase
+   ```
+4. Make the build script executable:
    ```bash
    chmod +x build-images.sh
    ```
-4. Build the images:
+5. Build the images:
    ```bash
    ./build-images.sh
    ```

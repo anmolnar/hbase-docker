@@ -1,5 +1,6 @@
 version: '3.8'
 
+# Variables are created in .env file
 services:
   hbase:
     image: "${HBASE_IMAGE}"
