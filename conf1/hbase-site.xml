@@ -51,5 +51,17 @@
     <name>hbase.master.hbck.chore.interval</name>
     <value>0</value>
   </property>
+  <property>
+    <name>hbase.coprocessor.master.classes</name>
+    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
+  </property>
+  <property>
+    <name>hbase.coprocessor.regionserver.classes</name>
+    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
+  </property>
+  <property>
+    <name>hbase.coprocessor.region.classes</name>
+    <value>org.apache.hadoop.hbase.security.access.ReadOnlyController</value>
+  </property>
 
 </configuration>

@@ -49,7 +49,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk \
     DATA_DIR=/data-store
 
 # Install necessary runtime packages
-RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients python3
+RUN INITRD=no DEBIAN_FRONTEND=noninteractive microdnf update -y && microdnf install -y unzip gzip wget hostname maven git diffutils vim openssh-clients python3 procps
 
 # Copy the built HBase binaries from the build-stage
 COPY --from=build-stage /opt/hbase-src/hbase-assembly/target/hbase-4.0.0-alpha-1-SNAPSHOT-bin.tar.gz /opt/
@@ -87,6 +87,10 @@ USER ${HBASE_USER}
 
 # Create necessary directories for HBase to run
 RUN mkdir -p "$DATA_DIR"/hbase "$DATA_DIR"/run "$DATA_DIR"/logs
+
+# Add the 'ls -l' alias
+RUN echo 'alias ll="ls -l"' >> /home/hbase/.bashrc
+RUN echo 'alias ll="ls -l"' >> /home/jboss/.bashrc
 
 # Start HBase and keep it running
 ENTRYPOINT ["/bin/bash", "-c", "${HBASE_HOME}/bin/start-hbase.sh && tail -f ${HBASE_LOGS_DIR}/*.log"]
